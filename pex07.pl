@@ -66,9 +66,9 @@ solve :-
 	% The weather balloon was not spotted on Wednesday.
     
     tell(smith, SmithDay, SmithObject),
-	tell(garcia, GarciaDay, GarciaObject),
 	tell(chen, ChenDay, ChenObject),
-	tell(jones, JonesDay, JonesObject).
+	tell(jones, JonesDay, JonesObject),
+    tell(garcia, GarciaDay, GarciaObject).
     
 % Succeeds if all elements of the argument list are bound and different.
 % Fails if any elements are unbound or equal to some other element.
@@ -79,6 +79,4 @@ all_different([_]).
 tell(X, Y, Z) :-
     write('C4C '), write(X), write(' saw the '), write(Z),
     write(' on '), write(Y), write('.'), nl.
-
-
 

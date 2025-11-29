@@ -1,12 +1,84 @@
 % pex5.pl
 % USAFA UFO Sightings 2024
 %
-% name: 
+% name: Will Lockhart
 %
-% Documentation: 
+% Documentation: None 
 %
 
 % The query to get the answer(s) or that there is no answer
 % ?- solve.
+
+cadet(smith).
+cadet(garcia).
+cadet(chen).
+cadet(jones).
+
+day(tues).
+day(wed).
+day(thurs).
+day(fri).
+
+object(balloon).
+object(kite).
+object(fighter).
+object(cloud).
+
+solve :-
+    object(SmithObject), object(GarciaObject), object(ChenObject), object(JonesObject),
+    all_different([SmithObject, GarciaObject, ChenObject, JonesObject]),
+    
+    day(SmithDay), day(GarciaDay), day(ChenDay), day(JonesDay),
+    all_different([SmithDay, GarciaDay, ChenDay, JonesDay]),
+    
+    Triples =[ [smith, SmithDay, SmithObject],
+             [garcia, GarciaDay, GarciaObject],
+             [chen, ChenDay, ChenObject],
+             [jones, JonesDay, JonesObject] ],
+    
+    % C4C Smith did not see a weather balloon, nor kite.
+    \+ member([smith, _, balloon], Triples),
+    \+ member([smith, _, kite], Triples),
+    
+	% The one who saw the kite isn’t C4C Garcia.
+	\+ member([garcia, _, kite], Triples),
+    
+	% Friday’s sighting was made by either C4C Chen or the one who saw the fighter aircraft.
+	% not needed
+    
+	% The kite was not sighted on Tuesday.
+	\+ member([_, tues, kite], Triples),
+    
+	% Neither C4C Garcia nor C4C Jones saw the weather balloon.
+	\+ member([garcia, _, balloon], Triples),
+    \+ member([jones, _, balloon], Triples),
+    
+	% C4C Jones did not make their sighting on Tuesday.
+	\+ member([jones, tues, _], Triples),
+    
+	% C4C Smith saw an object that turned out to be a cloud.
+    member([smith, _, cloud], Triples),
+	
+    
+	% The fighter aircraft was spotted on Friday.
+	member([_, fri, fighter], Triples),
+    
+	% The weather balloon was not spotted on Wednesday.
+    
+    tell(smith, SmithDay, SmithObject),
+	tell(garcia, GarciaDay, GarciaObject),
+	tell(chen, ChenDay, ChenObject),
+	tell(jones, JonesDay, JonesObject).
+    
+% Succeeds if all elements of the argument list are bound and different.
+% Fails if any elements are unbound or equal to some other element.
+all_different([H | T]) :- member(H, T), !, fail.
+all_different([_ | T]) :- all_different(T).
+all_different([_]).
+
+tell(X, Y, Z) :-
+    write('C4C '), write(X), write(' saw the '), write(Z),
+    write(' on '), write(Y), write('.'), nl.
+
 
 

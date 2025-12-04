@@ -67,11 +67,7 @@ solve :-
 	member([_, fri, fighter], Triples),
     
 	% The weather balloon was not spotted on Wednesday.
-    
-    %tell(smith, SmithDay, SmithObject),
-	%tell(chen, ChenDay, ChenObject),
-	%tell(jones, JonesDay, JonesObject),
-    %tell(garcia, GarciaDay, GarciaObject).
+	\+ member([_, wed, balloon], Triples),
     
     member(W, Triples),
     member(tues, W),

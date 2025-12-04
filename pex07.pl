@@ -1,5 +1,3 @@
-
-You said:
 % pex5.pl
 % USAFA UFO Sightings 2024
 %
@@ -7,7 +5,7 @@ You said:
 %
 % Documentation: While looking over C2C Zach Poupart's code, discovered I didn't 
 % implement day order in output. Then tryed to figure out how member function worked, 
-% discovered this website to implement lines 73-85. 
+% discovered this website to implement lines 76-83. 
 % https://www.swi-prolog.org/pldoc/man?predicate=member/2
 %
 
@@ -84,7 +82,7 @@ solve :-
     member(Z, Triples),
     member(fri, Z),
     
-    
+
     tell(W),
     tell(X),
     tell(Y),

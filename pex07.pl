@@ -100,9 +100,3 @@ tell([Cadet, Day, Object]) :-
     
     write('C4C '), write(Cadet), write(' saw the '), write(Object),
     write(' on '), write(Day), write('.'), nl.
-
-%day_in_list([H|T], Day) :- member(H, Day), !, fail.
-%day_in_list([_|T]) :- day_in_list(T).
-%day_in_list([_]).
-%return_list(Day, Triples, Cadet, Object) :-
-%    member([Cadet, Day, Object], Triples).

@@ -1,9 +1,14 @@
+
+You said:
 % pex5.pl
 % USAFA UFO Sightings 2024
 %
 % name: Will Lockhart
 %
-% Documentation: None 
+% Documentation: While looking over C2C Zach Poupart's code, discovered I didn't 
+% implement day order in output. Then tryed to figure out how member function worked, 
+% discovered this website to implement lines 73-85. 
+% https://www.swi-prolog.org/pldoc/man?predicate=member/2
 %
 
 % The query to get the answer(s) or that there is no answer
@@ -65,10 +70,25 @@ solve :-
     
 	% The weather balloon was not spotted on Wednesday.
     
-    tell(smith, SmithDay, SmithObject),
-	tell(chen, ChenDay, ChenObject),
-	tell(jones, JonesDay, JonesObject),
-    tell(garcia, GarciaDay, GarciaObject).
+    %tell(smith, SmithDay, SmithObject),
+	%tell(chen, ChenDay, ChenObject),
+	%tell(jones, JonesDay, JonesObject),
+    %tell(garcia, GarciaDay, GarciaObject).
+    
+    member(W, Triples),
+    member(tues, W),
+    member(X, Triples),
+    member(wed, X),
+    member(Y, Triples),
+    member(thurs, Y),
+    member(Z, Triples),
+    member(fri, Z),
+    
+    
+    tell(W),
+    tell(X),
+    tell(Y),
+    tell(Z).
     
 % Succeeds if all elements of the argument list are bound and different.
 % Fails if any elements are unbound or equal to some other element.
@@ -76,7 +96,13 @@ all_different([H | T]) :- member(H, T), !, fail.
 all_different([_ | T]) :- all_different(T).
 all_different([_]).
 
-tell(X, Y, Z) :-
-    write('C4C '), write(X), write(' saw the '), write(Z),
-    write(' on '), write(Y), write('.'), nl.
+tell([Cadet, Day, Object]) :-
+    
+    write('C4C '), write(Cadet), write(' saw the '), write(Object),
+    write(' on '), write(Day), write('.'), nl.
 
+%day_in_list([H|T], Day) :- member(H, Day), !, fail.
+%day_in_list([_|T]) :- day_in_list(T).
+%day_in_list([_]).
+%return_list(Day, Triples, Cadet, Object) :-
+%    member([Cadet, Day, Object], Triples).
